@@ -1,12 +1,13 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import "./App.css";
-
-const router = createBrowserRouter([
-  { path: "/", element: <p>main</p>, errorElement: <p>error</p> },
-  { path: "/sub", element: <p>sub</p> },
-]);
+import Navbar from "./components/Navbar";
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <Navbar />
+      <Outlet />
+    </>
+  );
 }
 export default App;
