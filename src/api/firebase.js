@@ -6,7 +6,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, get } from "firebase/database";
+import { getDatabase, ref, set, get, remove, update } from "firebase/database";
 import { v4 as uuidv4 } from "uuid";
 
 const firebaseConfig = {
@@ -17,6 +17,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+console.info(app);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 const database = getDatabase(app);
@@ -39,7 +40,7 @@ export async function addPost(userInfo, post, date) {
   const id = uuidv4();
   set(ref(database, `/posts/${id}`), {
     ...post,
-    uuid: id,
+    postId: id,
     title: post.title,
     content: post.content,
     userId: userInfo.uid,
@@ -53,7 +54,7 @@ export async function addPost(userInfo, post, date) {
 //   return gets.val();
 // }
 
-export async function getPost() {
+export async function getPosts() {
   const dbRef = ref(database, "posts");
   return get(dbRef).then((snapshot) => {
     if (snapshot.exists()) {
@@ -61,4 +62,31 @@ export async function getPost() {
     }
     return [];
   });
+}
+
+export async function getPost(postId) {
+  const dbRef = ref(database, `posts/${postId}`);
+  return get(dbRef).then((snapshot) => {
+    console.info(snapshot.exists());
+    if (snapshot.exists()) {
+      return snapshot.val();
+    }
+    return null;
+  });
+}
+
+export async function deletePost(postId) {
+  return remove(ref(database, `posts/${postId}`));
+}
+
+export async function updatePost(post, newPost) {
+  const updatedPost = {
+    ...post,
+    title: newPost.title,
+    content: newPost.content,
+  };
+
+  const updates = {};
+  updates[`/posts/${post.postId}`] = updatedPost;
+  return update(ref(database), updates);
 }
