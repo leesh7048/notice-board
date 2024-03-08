@@ -17,7 +17,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-console.info(app);
+
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 const database = getDatabase(app);
@@ -67,7 +67,6 @@ export async function getPosts() {
 export async function getPost(postId) {
   const dbRef = ref(database, `posts/${postId}`);
   return get(dbRef).then((snapshot) => {
-    console.info(snapshot.exists());
     if (snapshot.exists()) {
       return snapshot.val();
     }
@@ -79,14 +78,8 @@ export async function deletePost(postId) {
   return remove(ref(database, `posts/${postId}`));
 }
 
-export async function updatePost(post, newPost) {
-  const updatedPost = {
-    ...post,
-    title: newPost.title,
-    content: newPost.content,
-  };
-
+export async function updatePost(updatedPost) {
   const updates = {};
-  updates[`/posts/${post.postId}`] = updatedPost;
+  updates[`/posts/${updatedPost.postId}`] = updatedPost;
   return update(ref(database), updates);
 }
