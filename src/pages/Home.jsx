@@ -7,6 +7,7 @@ export default function Home() {
   return (
     <>
       <List />
+
       <button className="left-1" onClick={() => navigate("/postInput")}>
         글쓰기
       </button>

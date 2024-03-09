@@ -5,11 +5,11 @@ import { useAuthContext } from "../context/AuthContext";
 
 export default function PostDetail() {
   const [isUpdate, setIsUpdate] = useState(false);
-  const { user } = useAuthContext();
   const [post, setPost] = useState({});
   const params = useParams();
-  console.log(params.id);
-  const { title, content, email, date, postId } = post;
+  const { user } = useAuthContext();
+
+  const { title, content, email, date, postId, userId } = post;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,12 +18,13 @@ export default function PostDetail() {
       setLoading(false);
     });
   }, [params.id]);
-  console.log(post);
 
   const navigate = useNavigate();
   const handleDelete = () => {
-    deletePost(postId);
-    navigate("/");
+    if (window.confirm("삭제하시겠습니까?")) {
+      deletePost(postId);
+      navigate("/");
+    }
   };
   const handleUpdate = () => {
     setIsUpdate(!isUpdate);
@@ -35,7 +36,7 @@ export default function PostDetail() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    updatePost(post, post, user);
+    updatePost(post);
     setIsUpdate(!isUpdate);
   };
 
@@ -72,18 +73,22 @@ export default function PostDetail() {
             {content}
           </div>
 
-          <button
-            className="bg-[#2a419a] text-white p-3"
-            onClick={handleUpdate}
-          >
-            수정
-          </button>
-          <button
-            className="bg-[#d1d869] text-white p-3"
-            onClick={handleDelete}
-          >
-            삭제
-          </button>
+          {user?.uid === userId && (
+            <div>
+              <button
+                className="bg-[#2a419a] text-white p-3"
+                onClick={handleUpdate}
+              >
+                수정
+              </button>
+              <button
+                className="bg-[#d1d869] text-white p-3"
+                onClick={handleDelete}
+              >
+                삭제
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div className="w-full pt-5 ">
