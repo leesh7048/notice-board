@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Post from "./Post";
 import { getPosts } from "../api/firebase";
+import PageNation from "./PageNation";
 
 export default function List() {
   const [allPost, setAllPost] = useState();
@@ -27,15 +28,18 @@ export default function List() {
             <th>날짜</th>
           </tr>
         </thead>
-        {allPost?.map((post, index) => (
-          <Post
-            key={post.postId}
-            post={post}
-            index={index}
-            allPostLength={allPost.length}
-          />
-        ))}
+        <tbody>
+          {allPost?.map((post, index) => (
+            <Post
+              key={post.postId}
+              post={post}
+              index={index}
+              allPostLength={allPost.length}
+            />
+          ))}
+        </tbody>
       </table>
+      <PageNation allPost={allPost} />
     </>
   );
 }
