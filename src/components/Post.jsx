@@ -8,7 +8,7 @@ export default function Post({ post, index, allPostLength }) {
   const navigate = useNavigate();
   return (
     <tr
-      className=" border-collapse border-b-gray-300 border-b "
+      className=" border-collapse border-b-gray-300 border-b cursor-pointer"
       onClick={() => {
         navigate(`/postDetail/${postId}`);
       }}
