@@ -20,3 +20,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+input {
+  @apply focus:outline-none;
+}
+textarea {
+  @apply focus:outline-none;
+}
