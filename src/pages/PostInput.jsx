@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function PostInput() {
   const [post, setPost] = useState({});
-  const { user } = useAuthContext();
+  const { userInfo } = useAuthContext();
   function submitDate() {
     const date = new Date();
     const dt = date.toISOString();
@@ -20,7 +20,6 @@ export default function PostInput() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userInfo = user;
     const saveDate = submitDate();
     addPost(userInfo, post, saveDate);
     navigate("/");

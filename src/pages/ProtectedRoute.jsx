@@ -3,12 +3,12 @@ import { Navigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 
 export default function ProtectedRoute({ children }) {
-  const { user } = useAuthContext();
+  const { userLoginStatus } = useAuthContext();
 
-  if (user.status === "login비완료") {
+  if (userLoginStatus === "login비완료") {
     return <Navigate to="/" replace />;
-  } else if (user.status === "네트워크 통신중") {
-    return <div>loding</div>;
+  } else if (userLoginStatus === "네트워크 통신중") {
+    return <div>loading</div>;
   }
 
   return children;

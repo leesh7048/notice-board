@@ -7,7 +7,7 @@ export default function PostDetail() {
   const [isUpdate, setIsUpdate] = useState(false);
   const [post, setPost] = useState({});
   const params = useParams();
-  const { user } = useAuthContext();
+  const { userInfo } = useAuthContext();
 
   const { title, content, email, date, postId, userId } = post;
   const [loading, setLoading] = useState(true);
@@ -73,7 +73,7 @@ export default function PostDetail() {
             {content}
           </div>
 
-          {user?.uid === userId && (
+          {userInfo?.uid === userId && (
             <div>
               <button
                 className="bg-[#2a419a] text-white p-3"
