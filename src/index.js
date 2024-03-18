@@ -6,12 +6,27 @@ import App from "./App";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 
+import PostDetail from "./pages/PostDetail";
+import PostInput from "./pages/PostInput";
+import ProtectedRoute from "./pages/ProtectedRoute";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     errorElement: <NotFound />,
-    children: [{ index: true, element: <Home /> }],
+    children: [
+      { index: true, element: <Home /> },
+      {
+        path: "/postInput",
+        element: (
+          <ProtectedRoute>
+            <PostInput />
+          </ProtectedRoute>
+        ),
+      },
+      { path: "/postDetail/:id", element: <PostDetail /> },
+    ],
   },
 ]);
 
