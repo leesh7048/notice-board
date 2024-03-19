@@ -96,6 +96,7 @@ export default function PostDetail() {
             <input
               onChange={handleChange}
               name="title"
+              maxLength={70}
               autoFocus
               value={title}
               required

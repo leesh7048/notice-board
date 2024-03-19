@@ -37,6 +37,7 @@ export default function PostInput() {
         <input
           type="text"
           name="title"
+          maxLength={70}
           value={post.title ?? ""}
           required
           placeholder="제목"
