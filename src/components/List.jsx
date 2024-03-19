@@ -31,7 +31,7 @@ export default function List() {
   }
 
   return (
-    <>
+    <div className="flex flex-col items-center">
       <table className="mt-6 w-[1024px] table-fixed">
         <colgroup>
           <col className="w-[88px]" />
@@ -65,6 +65,6 @@ export default function List() {
         setPage={setPage}
         totalSet={totalSet}
       />
-    </>
+    </div>
   );
 }
