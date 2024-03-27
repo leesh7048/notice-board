@@ -47,6 +47,7 @@ export default function PostInput() {
         <textarea
           name="content"
           required
+          maxLength={100}
           className="border-solid border border-gray-300 my-1 resize-none h-96 p-1 "
           placeholder="내용"
           value={post.content ?? ""}

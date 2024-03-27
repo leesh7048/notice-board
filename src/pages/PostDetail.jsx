@@ -69,7 +69,7 @@ export default function PostDetail() {
             </div>
           </div>
 
-          <div className="h-[400px] border-b border-b-gray-300 text-[20px] p-3 ">
+          <div className="h-[400px] border-b whitespace-pre-wrap overflow-y-auto border-b-gray-300 text-[20px] p-3 ">
             {content}
           </div>
 
@@ -125,6 +125,7 @@ export default function PostDetail() {
               name="content"
               value={content}
               required
+              maxLength={100}
               className="h-[400px] border-b border-b-gray-300 text-[20px] p-3 w-full bg-yellow-100 "
             />
             <button className="bg-[#2a419a] text-white p-3">저장</button>
