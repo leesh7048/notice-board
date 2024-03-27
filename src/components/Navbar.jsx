@@ -1,10 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PiNotepadBold } from "react-icons/pi";
 import { useAuthContext } from "../context/AuthContext";
 
 export default function Navbar() {
   const { userLoginStatus, login, logout } = useAuthContext();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <header className="flex justify-between border-b border-gray--300 p-2">
@@ -18,7 +24,7 @@ export default function Navbar() {
         </button>
       )}
       {userLoginStatus === "login완료" && (
-        <button className="text-3xl font-semibold" onClick={logout}>
+        <button className="text-3xl font-semibold" onClick={handleLogout}>
           logout
         </button>
       )}
