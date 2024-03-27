@@ -33,9 +33,8 @@ export default function PageNation({
       {Array(btnRange)
         .fill(startPage)
         .map((v, i) => {
-          if (startPage + i > totalPage) {
-            return;
-          }
+          if (startPage + i > totalPage) return null;
+
           return (
             <button
               key={i}
