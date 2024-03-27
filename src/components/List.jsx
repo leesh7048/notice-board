@@ -10,9 +10,10 @@ export default function List() {
   const [page, setPage] = useState(1); //현재 페이지수
   const { userInfo } = useAuthContext();
 
-  const totalPost = myPost
-    ? allPost?.filter((post) => post.userId === userInfo.uid).length
-    : allPost?.length; // 총 게시물 수
+  const totalPost =
+    myPost && userInfo
+      ? allPost?.filter((post) => post.userId === userInfo.uid).length
+      : allPost?.length; // 총 게시물 수
   const pageRange = 10; // 페이지당 보여줄 게시물 수
   const btnRange = 5; // 보여질 페이지 버튼의 개수
   const currentSet = Math.ceil(page / btnRange); // 현재 버튼이 몇번째 세트인지 나타내는 수
@@ -65,7 +66,7 @@ export default function List() {
           </tr>
         </thead>
         <tbody>
-          {myPost
+          {myPost && userInfo
             ? allPost
                 ?.filter((post) => post.userId === userInfo.uid)
                 .slice(startPost - 1, endPost)
