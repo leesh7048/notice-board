@@ -7,7 +7,6 @@ import { useAuthContext } from "../context/AuthContext";
 export default function List() {
   const [allPost, setAllPost] = useState();
   const [myPost, setMyPost] = useState(false);
-
   const [page, setPage] = useState(1); //현재 페이지수
   const { userInfo } = useAuthContext();
 
@@ -37,6 +36,7 @@ export default function List() {
   }
   const handlePostsFilterClick = (e) => {
     e.target.value === "MyPost" ? setMyPost(true) : setMyPost(false);
+    setPage(1);
   };
 
   return (
@@ -44,7 +44,7 @@ export default function List() {
       <div>
         <select name="post" id="" onChange={handlePostsFilterClick}>
           <option value="AllPost">AllPost</option>
-          <option value="MyPost">MyPost</option>
+          {userInfo && <option value="MyPost">MyPost</option>}
         </select>
       </div>
       <table className="mt-1 w-[1024px] table-fixed">
