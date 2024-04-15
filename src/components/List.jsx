@@ -14,8 +14,8 @@ export default function List() {
     myPost && userInfo
       ? allPost?.filter((post) => post.userId === userInfo.uid).length
       : allPost?.length; // 총 게시물 수
-  const pageRange = 10; // 페이지당 보여줄 게시물 수
-  const btnRange = 5; // 보여질 페이지 버튼의 개수
+  const pageRange = 3; // 페이지당 보여줄 게시물 수
+  const btnRange = 3; // 보여질 페이지 버튼의 개수
   const currentSet = Math.ceil(page / btnRange); // 현재 버튼이 몇번째 세트인지 나타내는 수
   const startPage = (currentSet - 1) * btnRange + 1; // 현재 보여질 버튼의 첫번째 수
   const endPage = startPage + btnRange - 1; // 현재 보여질 버튼의 마지막 수

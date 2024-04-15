@@ -8,8 +8,10 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout();
-    navigate("/");
+    if (window.confirm("로그아웃 하시겠습니까?")) {
+      logout();
+      navigate("/");
+    }
   };
 
   return (
